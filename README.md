@@ -1,6 +1,8 @@
 # orderbook_cpp
 
-An order book with C++
-- used CMake
-- used Google Test
+An order book with C++.
+Technologies used:
+- CMake
+- Google Test
+- Cling
 
