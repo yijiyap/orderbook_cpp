@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 3.15)
+
+add_definitions(-std=c++17)
+
+set(HEADER_FILES OrderBook.h)
+set(SOURCE_FILES OrderBook.cpp)
+
+add_library(OrderBook STATIC ${SOURCE_FILES} ${HEADER_FILES})
