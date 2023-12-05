@@ -32,3 +32,12 @@ std::ostream& operator<<(std::ostream& os, const OrderBook& order_book) {
         os << "ASK " << it->first << " " << it->second << std::endl;
     return os;
 }
+
+OrderBook::BidAsk OrderBook::get_bid_ask() const {
+    BidAsk bid_ask;
+    if (!bids.empty())
+        bid_ask.bid = std::make_pair(bids.rbegin()->first, bids.rbegin()->second);
+    if (!asks.empty())
+        bid_ask.ask = std::make_pair(asks.begin()->first, asks.begin()->second);
+    return bid_ask;
+}

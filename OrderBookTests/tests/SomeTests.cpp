@@ -9,5 +9,9 @@ TEST(OrderBookTests, OrderBookEmptyByDefault) {
 TEST(OrderBookTests, OrderBookAddBid) {
     OrderBook order_book;
     order_book.add_bid(12, 34);
-    EXPECT_FALSE(order_book.is_empty());
+    auto bid_ask = order_book.get_bid_ask();
+    EXPECT_TRUE(bid_ask.bid.is_initialized());
+    auto bid = bidask.bid.get();
+    EXPECT_EQ(bid.first, 12);
+    EXPECT_EQ(bid.second, 34);
 }
