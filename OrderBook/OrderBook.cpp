@@ -41,3 +41,35 @@ OrderBook::BidAsk OrderBook::get_bid_ask() const {
         bid_ask.ask = std::make_pair(asks.begin()->first, asks.begin()->second);
     return bid_ask;
 }
+
+boost::optional<int> OrderBook::BidAsk::spread() const {
+    if (!bid.is_initialized() || !ask.is_initialized())
+        return boost::none;
+    return ask.get().first - bid.get().first;
+}
+
+void OrderBook::remove_bid(int price, int quantity) {
+    remove(price, quantity, true);
+}
+
+void OrderBook::remove_ask(int price, int quantity) {
+    remove(price, quantity, false);
+}
+
+void OrderBook::remove(int price, int quantity, bool is_bid) {
+    if (is_bid) {
+        auto it = bids.find(price);
+        if (it == bids.end())
+            return;
+        it->second -= quantity;
+        if (it->second <= 0)
+            bids.erase(it);
+    } else {
+        auto it = asks.find(price);
+        if (it == asks.end())
+            return;
+        it->second -= quantity;
+        if (it->second <= 0)
+            asks.erase(it);
+    }
+}

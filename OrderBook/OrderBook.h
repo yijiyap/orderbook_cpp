@@ -15,8 +15,11 @@ public:
     bool is_empty() const;
     void add_bid(int price, int quantity);
     void add_ask(int price, int quantity);
+    void remove_bid(int price, int quantity);
+    void remove_ask(int price, int quantity);
 
     BidAsk get_bid_ask() const;
 
     friend std::ostream& operator<<(std::ostream& os, const OrderBook& order_book); // prints the order book
+    friend std::ostream& operator<<(std::ostream& os, const OrderBook::BidAsk& bid_ask); // prints the best bid and ask
 };
